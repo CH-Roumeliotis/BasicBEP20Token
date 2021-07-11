@@ -1,0 +1,45 @@
+pragma solidity 0.8.4;
+
+contract bep20Token{
+    string public name = "CHR Token v1.0";
+    string public symbol = "CHR";
+    uint public totalSupply = 10000*10**8;
+    uint public decimals = 18;
+    
+    mapping (address => uint) public balances;
+    mapping(address => mapping(address => uint)) public allowance;
+    
+    event transfered(address indexed from, address indexed to, uint value);
+    event approval(address indexed owner, address indexed spender, uint value);
+    
+    constructor () {
+        balances[msg.sender] = totalSupply;
+    }
+    
+    function balanceOf(address owner) public view returns(uint) {
+        return balances[owner];
+    }
+    
+    function transfer(address to, uint value) public returns(bool){
+        require(balanceOf(msg.sender) >= value, "Balance should be greater than current value");
+        balances[to] += value;
+        balances[msg.sender] -= value;
+        emit transfered(msg.sender, to, value);
+        return true;
+    }
+    
+    function transferFrom(address from, address to, uint value) public returns(bool){
+        require(balanceOf(from) >= value, "Balance should be greater than current value");
+        require(allowance[from][msg.sender] >= value, "allowance too low");
+        balances[to] += value;
+        balances[from] -= value;
+        emit transfered(from, to, value);
+        return true;
+    }
+    
+    function approve(address spender, uint value) public returns(bool){
+        allowance[msg.sender][spender] = value;
+        emit approval(msg.sender, spender, value);
+        return true;
+    }
+}
