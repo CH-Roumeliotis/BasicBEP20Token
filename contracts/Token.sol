@@ -13,6 +13,7 @@ contract bep20Token{
     event approval(address indexed owner, address indexed spender, uint value);
     
     constructor () {
+        //Give all created tokens to adress that deployed the contract
         balances[msg.sender] = totalSupply;
     }
     
