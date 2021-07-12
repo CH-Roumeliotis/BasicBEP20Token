@@ -2,7 +2,7 @@
 This is a basic version of a BEP20 Token. 
 
 You can deploy it in https://remix.ethereum.org/ 
-You will need:
+<br>You will need:
 1. Metamask as a wallet
 2. Create an account (see: https://docs.binance.org/smart-chain/wallet/metamask.html)
 3. BNB Tokens (buy here: https://testnet.binance.org/faucet-smart)
